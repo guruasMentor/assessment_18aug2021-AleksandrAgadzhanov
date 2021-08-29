@@ -36,22 +36,29 @@ public class UserInterface {
 
 			option = scanner.nextInt();
 
-			if (option == 1) {
+			if (option == 1) { // Mentor Comment : Consider using switch...case instead of if
+
+				// Mentor Comment : Statement from this Line upto Line no 86 could have been put in a separate function like createPlayers() and called from here
 				System.out.println("Enter the number of players that you would like to add.");
 
-				int numberOfPlayers = scanner.nextInt();
+				int numberOfPlayers = scanner.nextInt(); // Mentor Comment: what is the range for this input?
+
 
 				for (int i = 1; i <= numberOfPlayers; i++) {
 					System.out.println("Please enter the name of player " + i + ": ");
 
-					Player p = new Player(scanner.next());
+					Player p = new Player(scanner.next()); // Mentor Comment: What if the user enters some blank spaces as name?
 
 					while (p.getCategory() == null) {
 						System.out.println("Please enter the category of player " + i + " from one of the following:"
 								+ " \"Defender\", \"Midfielder\", \"Forward\" or \"Goalkeeper\".");
 
 						try {
+							
+
 							p.setCategory(scanner.next());
+
+							
 						} catch (InvalidPlayerInformationException e) {
 							System.out.println(e.getMessage());
 						}
@@ -61,6 +68,7 @@ public class UserInterface {
 						System.out.println("Please enter the rank of player " + i + ": ");
 
 						try {
+							
 							p.setRank(scanner.nextInt());
 						} catch (InvalidPlayerInformationException e) {
 							System.out.println(e.getMessage());
@@ -68,9 +76,14 @@ public class UserInterface {
 					}
 
 					try {
+						/* Mentor Comment
+						ensure that playerRepository is not null before calling the method addPlayer...
+						*/
+
 						playerRepository.addPlayer(p);
+					
 					} catch (PlayerAlreadyExistsException e) {
-						e.getMessage();
+						e.getMessage(); // Mentor Comment: you should print the exception's getMesssage()
 					}
 				}
 			}
@@ -84,7 +97,7 @@ public class UserInterface {
 				}
 			}
 
-			else if (option == 0) {
+			else if (option == 0) {  //Mentor Comment : this condition is already given in while loop construct
 				break;
 			}
 		}

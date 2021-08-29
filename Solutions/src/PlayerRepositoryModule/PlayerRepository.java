@@ -18,15 +18,19 @@ public class PlayerRepository {
 	
 	
 	
-	public void addPlayer(Player p) throws PlayerAlreadyExistsException {
-		for (Player storedPlayer : players) { //mentor comment
+	public void addPlayer(Player p) throws PlayerAlreadyExistsException { // Mentor Comment : parameter could have been named as player
+	    // Mentor Comment: Check if p is equal to null and return immediately if null...
+		// Mentor Comment: What will happen if p==null (the caller calling addPlayer(null) )
+		for (Player storedPlayer : players) { //Mentor comment: it is good practice to use "this" when you refer a instance field e.g this.players 
 			if (storedPlayer.equals(p)) {
 				throw new PlayerAlreadyExistsException("This player already exists in the repository.");
 			}
 		}
 		
 		String category = p.getCategory();
-		
+		// Mentor Comment : Ensure category is not null before using in switch
+		// Use category.equalsIgnoreCase() in switch condition
+
 		switch (category) {
 		case "Defender": numberOfDefenders++; break;
 		case "Midfielder": numberOfMidFielders++; break;
@@ -46,6 +50,9 @@ public class PlayerRepository {
 							+ "Number of Midfielders: " + numberOfMidFielders + " (3 required)\n"
 									+ "Number of Forwards: " + numberOfForwards + " (3 required)\n"
 											+ "Number of Goalkeepers: " + numberOfGoalKeepers + " (1 required)\n");
+
+			//Mentor Comment : The above error message is very lengthy and has many concatenations..Consider using String Buffer for forming the message and use it with Exception object creation
+
 		}
 		else {
 			StringBuilder sb = new StringBuilder("Team formed with 11 players:\n"
@@ -59,6 +66,8 @@ public class PlayerRepository {
 				Player currentPlayer = players.get(i);
 				boolean shouldBeAdded = false;
 				
+
+				// Mentor Comment : use equalsIgnoreCase on String objects
 				if (addedDefenders < 4 && currentPlayer.getCategory().equals("Defender")) {
 					addedDefenders++;
 					shouldBeAdded = true;

@@ -29,6 +29,10 @@ public class Player {
 	}
 	
 	public void setCategory(String category) throws InvalidPlayerInformationException {
+
+		// Mentor Comment:
+		// You shall use category.equalsIgnoreCase()
+
 		if (category.equals("Defender") || category.equals("Midfielder") || category.equals("Forward") || category.equals("Goalkeeper")) {
 			this.category = category;
 		}
