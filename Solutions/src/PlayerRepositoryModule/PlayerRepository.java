@@ -19,7 +19,7 @@ public class PlayerRepository {
 	
 	
 	public void addPlayer(Player p) throws PlayerAlreadyExistsException {
-		for (Player storedPlayer : players) {
+		for (Player storedPlayer : players) { //mentor comment
 			if (storedPlayer.equals(p)) {
 				throw new PlayerAlreadyExistsException("This player already exists in the repository.");
 			}
